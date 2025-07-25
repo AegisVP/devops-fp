@@ -1,0 +1,31 @@
+image:
+  repository: 033491664040.dkr.ecr.eu-central-1.amazonaws.com/vp-dja
+  tag: v1.0.0
+  pullPolicy: Always
+
+service:
+  type: ClusterIP
+  port: 8000
+
+ingress:
+  enabled: true
+  className: nginx
+  path: /
+  pathType: Prefix
+  tls: false
+
+autoscaling:
+  enabled: true
+  minReplicas: 2
+  maxReplicas: 6
+  targetCPU: 70
+
+config:
+  DJANGO_SECRET_KEY: 'o*vm=+3iy*mp3c0dhg+=np8dp%za+2xt%bp4_$zc3x-8$aw91c'
+  DJANGO_ALLOWED_HOSTS: '*'
+  ALLOWED_HOSTS: .eu-central-1.elb.amazonaws.com, .amazonaws.com
+  POSTGRES_HOST: django-postgresql
+  POSTGRES_PORT: 5432
+  POSTGRES_DB: django
+  POSTGRES_USER: postgres
+  POSTGRES_PASSWORD: postgres
