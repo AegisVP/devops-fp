@@ -4,15 +4,15 @@ image:
   pullPolicy: Always
 
 service:
-  type: ClusterIP
+  type: LoadBalancer
   port: 8000
 
 ingress:
-  enabled: true
-  className: nginx
-  path: /
-  pathType: Prefix
-  tls: false
+  enabled: false
+  # className: nginx
+  # path: /
+  # pathType: Prefix
+  # tls: false
 
 autoscaling:
   enabled: true
@@ -23,7 +23,7 @@ autoscaling:
 config:
   DJANGO_SECRET_KEY: 'o*vm=+3iy*mp3c0dhg+=np8dp%za+2xt%bp4_$zc3x-8$aw91c'
   DJANGO_ALLOWED_HOSTS: '*'
-  ALLOWED_HOSTS: .eu-central-1.elb.amazonaws.com, .amazonaws.com
+  ALLOWED_HOSTS: .eu-central-1.elb.amazonaws.com, .amazonaws.com, localhost
   POSTGRES_HOST: django-postgresql
   POSTGRES_PORT: 5432
   POSTGRES_DB: django
